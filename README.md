@@ -242,8 +242,8 @@ save
 | `outbound-interface eth0` | Applies only to WAN-bound traffic; inter-segment traffic is untouched |
 | `type masquerade` | Rewrites source address to eth0's and reverses it on replies |
 
-> 📸 **Screenshot:** `show interfaces ethernet eth0` with an active WAN lease
-> `docs/screenshots/03-wan-lease.png`
+<img width="658" height="376" alt="image" src="https://github.com/user-attachments/assets/dae19abf-217c-4980-9217-19fb687b4665" />
+
 
 ### Lab interfaces — eth1 and eth2
 
@@ -274,8 +274,7 @@ save
 answering queries from the internet is an open resolver — usable in
 amplification attacks.
 
-> 📸 **Screenshot:** `show configuration commands | match dhcp-server`
-> `docs/screenshots/04-dhcp-pools.png`
+<img width="660" height="581" alt="image" src="https://github.com/user-attachments/assets/22d31d4c-8818-47c8-9bec-1f2e7fe3badb" />
 
 ### Administrative account
 
@@ -306,8 +305,8 @@ The segmentation only means something once traffic between segments is
 denied. Separate subnets alone provide no enforcement — the router will
 happily route between them.
 
-> 📸 **Screenshot:** EdgeOS firewall ruleset overview
-> `docs/screenshots/05-firewall-rulesets.png`
+<img width="915" height="934" alt="image" src="https://github.com/user-attachments/assets/772aa298-6f31-4c23-8c92-797d55220288" />
+
 
 ### Address and port groups
 
@@ -460,8 +459,9 @@ Confirmed at the router as a policy drop rather than a routing failure:
 show firewall name LAB30_IN statistics
 ```
 
-> 📸 **Screenshot:** blocked ping alongside the incrementing drop counter
-> `docs/screenshots/06-lateral-blocked.png`
+<img width="617" height="209" alt="image" src="https://github.com/user-attachments/assets/4803a8eb-e52b-42a6-908f-5c1088336412" />
+
+<img width="432" height="224" alt="image" src="https://github.com/user-attachments/assets/50a39ffe-08f2-4e82-9baf-af124a18745b" />
 
 ### Permitted paths still work
 
@@ -472,8 +472,9 @@ show firewall name LAB30_IN statistics
 | `ping 8.8.8.8` | Any segment | succeeds |
 | `ping google.com` | Any segment | succeeds — proves DNS forwarding |
 
-> 📸 **Screenshot:** management access to Proxmox working
-> `docs/screenshots/07-mgmt-access.png`
+<img width="548" height="270" alt="image" src="https://github.com/user-attachments/assets/825b874a-22e1-44d1-b30c-afaf77efa3d0" />
+
+
 
 ### Useful commands
 
@@ -512,8 +513,7 @@ Layered connectivity test — each stage isolates a different failure:
 Proxmox VE 9.x (Debian 13 "trixie") on the mini PC, single NIC, static address
 on the `10.0.30.0/24` segment.
 
-> 📸 **Screenshot:** Proxmox summary page showing the node and guests
-> `docs/screenshots/08-proxmox-summary.png`
+<img width="957" height="743" alt="image" src="https://github.com/user-attachments/assets/5b39b541-c5b3-4c78-bc21-929579f3050c" />
 
 ### Networking
 
@@ -573,8 +573,8 @@ Container IDs cannot have leading zeros. `pct create 0626` fails with
 `vmid: invalid format`, which reads like a syntax error and is actually a
 range check.
 
-> 📸 **Screenshot:** `pct list` showing the running containers and the Wazuh VM
-> `docs/screenshots/09-proxmox-guests.png`
+<img width="802" height="484" alt="image" src="https://github.com/user-attachments/assets/9e8e03ee-34e2-4425-8445-221a0a469d83" />
+
 
 
 ---
@@ -584,8 +584,8 @@ range check.
 Wazuh 4.14.8 — manager, indexer and dashboard — on an Ubuntu Server VM at
 `10.0.30.60`, deployed from the published Docker Compose single-node stack.
 
-> 📸 **Screenshot:** Wazuh dashboard overview with agents reporting
-> `docs/screenshots/10-wazuh-dashboard.png`
+<img width="1913" height="989" alt="image" src="https://github.com/user-attachments/assets/6cebe2de-6ebe-4798-b196-b7896196c0be" />
+
 
 ### Why Docker and not the native installer
 
@@ -643,8 +643,7 @@ grep -A2 '<server>' /var/ossec/etc/ossec.conf
 grep -iE "valid key|connected to" /var/ossec/logs/ossec.log
 ```
 
-> 📸 **Screenshot:** `ossec.log` showing `Valid key received` and `Connected to the server`
-> `docs/screenshots/11-agent-connected.png`
+<img width="874" height="320" alt="image" src="https://github.com/user-attachments/assets/d31e929f-aa00-43d5-8263-9bf25c39c4c7" />
 
 
 ### Dashboard
@@ -656,8 +655,7 @@ https://10.0.30.60
 Typed with `https://` explicitly. A bare IP in the address bar is tried as
 `http` first, which times out and looks like the service is down.
 
-> 📸 **Screenshot:** Wazuh **Agents** page — both agents listed as Active
-> `docs/screenshots/12-wazuh-agents.png`
+<img width="953" height="952" alt="image" src="https://github.com/user-attachments/assets/1f595a5f-3cb6-4b8b-bf98-a1fdf45c0963" />
 
 
 ---
@@ -678,8 +676,8 @@ azure-lab/
 └── outputs.tf                  connection details
 ```
 
-> 📸 **Screenshot:** `terraform apply` completing, and the resource group in the portal
-> `docs/screenshots/13-terraform-apply.png`
+<img width="960" height="1032" alt="image" src="https://github.com/user-attachments/assets/fe66ed22-f8d3-4326-9913-7ece8114f9d1" />
+
 
 ### Design decisions worth defending
 
@@ -729,8 +727,8 @@ approved in Central US. The deployment ended up on `Standard_B2pts_v2` with the
 az vm list-skus -l centralus --size Standard_B2pts_v2 -o table
 ```
 
-> 📸 **Screenshot:** `az vm list-skus` output and the approved quota request
-> `docs/screenshots/14-azure-quota.png`
+<img width="582" height="191" alt="image" src="https://github.com/user-attachments/assets/e214c341-b28f-439a-a66c-f03e247bd32b" />
+
 
 
 ### Workflow
@@ -747,8 +745,8 @@ stale whenever state changes, which is the cost of being able to read a plan
 before applying it — and reading the plan is what caught a `Standard_B1s_v2`
 typo before it deployed.
 
-> 📸 **Screenshot:** `terraform plan` output before applying — the step that catches typos
-> `docs/screenshots/15-terraform-plan.png`
+<img width="946" height="111" alt="image" src="https://github.com/user-attachments/assets/1f1c2995-f982-4c48-9fbf-58c23f8bd878" />
+
 
 > 📸 **Screenshot:** Azure portal — resource group contents and VNet topology view
 > `docs/screenshots/16-azure-portal.png`
