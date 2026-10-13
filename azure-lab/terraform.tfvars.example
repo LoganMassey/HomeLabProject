@@ -1,0 +1,16 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored —
+# it holds your subscription id and home IP, neither of which belong in a repo.
+
+# az account show --query id -o tsv
+subscription_id = "00000000-0000-0000-0000-000000000000"
+
+# curl -4 ifconfig.me
+admin_source_ip = "203.0.113.45/32"
+
+location            = "eastus"
+prefix              = "lab"
+ssh_public_key_path = "~/.ssh/id_ed25519.pub"
+
+# Turn on after confirming a Network Watcher exists in your region:
+#   az network watcher list -o table
+enable_flow_logs = false

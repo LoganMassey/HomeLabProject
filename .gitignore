@@ -1,0 +1,29 @@
+# Terraform
+# State contains resource attributes in plaintext, including anything
+# sensitive the providers wrote. It never goes in git.
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+# Holds subscription id and home public IP
+terraform.tfvars
+*.auto.tfvars
+
+# Keys and certificates
+*.key
+*.pem
+*.ppk
+wg0.conf
+id_rsa
+id_ed25519
+
+# Router config backups may contain password hashes and public IPs —
+# sanitize before committing any of these deliberately
+config.boot
+*.config.backup
+
+# OS noise
+.DS_Store
+Thumbs.db

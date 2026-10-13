@@ -1,0 +1,51 @@
+#cloud-config
+# Prepares the tunnel endpoint. Deliberately does NOT generate or install
+# keys — those are created by hand after boot so no private key ever lands
+# in Terraform state or in this repo.
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - wireguard
+  - wireguard-tools
+  - tcpdump
+  - net-tools
+  - iptables-persistent
+
+write_files:
+  # Kernel-level IP forwarding. Azure's NIC-level ip_forwarding_enabled lets
+  # the fabric deliver transit packets to this VM; this lets Linux actually
+  # forward them. Both are required — setting only one is the usual reason a
+  # tunnel comes up but nothing routes across it.
+  - path: /etc/sysctl.d/99-wireguard-forward.conf
+    content: |
+      net.ipv4.ip_forward=1
+      net.ipv6.conf.all.forwarding=1
+    permissions: '0644'
+
+  - path: /etc/wireguard/README.txt
+    permissions: '0600'
+    content: |
+      Generate the keypair here, not in Terraform:
+
+        umask 077
+        wg genkey | tee /etc/wireguard/private.key | wg pubkey > /etc/wireguard/public.key
+
+      Then write /etc/wireguard/wg0.conf using the template in the repo,
+      pasting the EdgeRouter's public key as the peer.
+
+      Bring it up and enable at boot:
+
+        systemctl enable --now wg-quick@wg0
+
+      Check status:
+
+        wg show
+        ip route
+
+runcmd:
+  - [ sysctl, --system ]
+  - [ systemctl, enable, systemd-networkd ]
+
+final_message: "WireGuard host ready after $UPTIME seconds. Keys not yet generated."
