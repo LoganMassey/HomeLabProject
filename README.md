@@ -120,10 +120,6 @@ exactly two ports open to one host — enough to report telemetry, not enough
 to reach anything else. That constraint is demonstrated under
 [Verifying the whole system](#verifying-the-whole-system).
 
-> 📸 **Screenshot:** network topology / rack photo
-> `docs/screenshots/01-topology.png`
-
----
 
 ## Hardware
 
@@ -179,8 +175,7 @@ address for anything a tunnel endpoint originates itself. See the
 
 Configured entirely through the EdgeOS CLI rather than the setup wizard.
 
-> 📸 **Screenshot:** EdgeOS dashboard showing all interfaces
-> `docs/screenshots/02-edgeos-dashboard.png`
+<img width="1919" height="951" alt="image" src="https://github.com/user-attachments/assets/d1d4d5e9-cce4-4fe2-8bb5-92a644756f59" />
 
 ### Starting point
 
