@@ -748,11 +748,10 @@ typo before it deployed.
 <img width="946" height="111" alt="image" src="https://github.com/user-attachments/assets/1f1c2995-f982-4c48-9fbf-58c23f8bd878" />
 
 
-> 📸 **Screenshot:** Azure portal — resource group contents and VNet topology view
-> `docs/screenshots/16-azure-portal.png`
+<img width="1342" height="887" alt="image" src="https://github.com/user-attachments/assets/5f896140-2542-4990-afc7-d26d42607fec" />
+`
 
-> 📸 **Screenshot:** Azure portal — edge NSG rules, including the two non-obvious ones
-> `docs/screenshots/17-azure-nsg-rules.png`
+<img width="943" height="870" alt="image" src="https://github.com/user-attachments/assets/fd3e3328-d069-4dc0-bf22-c196733a7556" />
 
 
 ---
@@ -764,8 +763,12 @@ EdgeRouter itself. EdgeOS has no native WireGuard — only a third-party package
 that breaks on firmware updates — and keeping the tunnel off the router means a
 mistake there does not take the whole network down.
 
-> 📸 **Screenshot:** `wg show` from both ends with a recent handshake
-> `docs/screenshots/18-wireguard-handshake.png`
+<img width="535" height="224" alt="image" src="https://github.com/user-attachments/assets/9a373bbd-da80-452d-aab1-6fe0de05c120" />
+
+<img width="531" height="244" alt="image" src="https://github.com/user-attachments/assets/3e055a61-ecc5-424e-ba4e-5cf1bca3537d" />
+
+
+`
 
 ### Container
 
@@ -797,8 +800,8 @@ depends on `wireguard-modules | linux-image-*` and apt satisfies that by
 pulling a 108 MB kernel into a container that will never boot one. The module
 comes from the Proxmox host.
 
-> 📸 **Screenshot:** `wg-quick up wg0` echoing each command it runs
-> `docs/screenshots/19-wgquick-up.png`
+<img width="480" height="154" alt="image" src="https://github.com/user-attachments/assets/a6d1ae23-5a01-41e2-8e08-198ceb905109" />
+
 
 
 ### Configuration
@@ -899,8 +902,8 @@ set firewall name MGMT_IN rule 30 destination group network-group AZURE-NETS
 Groups must be committed before any rule references them, or the commit fails
 with `Group [AZURE-NETS] has not been defined`.
 
-> 📸 **Screenshot:** `show ip route 10.10.0.0/16` and the MGMT_IN ruleset
-> `docs/screenshots/20-static-route.png`
+<img width="660" height="375" alt="image" src="https://github.com/user-attachments/assets/3983c688-189e-480e-9513-d34b12ff864d" />
+
 
 
 ### NSG rules the design actually requires
@@ -948,8 +951,8 @@ single most transferable thing in this repository.
 Kali Linux on the ThinkCentre at `10.0.20.50`, on its own segment with almost
 nothing permitted outbound.
 
-> 📸 **Screenshot:** Kali desktop with the agent connected
-> `docs/screenshots/21-kali-agent.png`
+<img width="944" height="718" alt="image" src="https://github.com/user-attachments/assets/a903c81d-0d38-488f-8099-3499c2834023" />
+
 
 ### Install notes
 
@@ -993,8 +996,8 @@ set firewall name LAB20_IN rule 20 destination port 1514,1515
 Two ports to one host. That is the entire permitted surface from the attack
 segment into the rest of the lab.
 
-> 📸 **Screenshot:** `show firewall name LAB20_IN statistics` — rule 20 accepting, rule 90 dropping
-> `docs/screenshots/22-lab20-statistics.png`
+<img width="669" height="271" alt="image" src="https://github.com/user-attachments/assets/e3fae76d-9be9-4591-b241-071961899280" />
+
 
 
 ---
@@ -1020,8 +1023,8 @@ Exactly the two ports policy permits, and nothing else. `-Pn` skips host
 discovery, because ICMP is dropped too and nmap would otherwise report the
 host as down and scan nothing.
 
-> 📸 **Screenshot:** the nmap output above
-> `docs/screenshots/23-nmap-filtered.png`
+<img width="606" height="342" alt="image" src="https://github.com/user-attachments/assets/76a2fe4b-713f-4087-841c-c17f7e04029e" />
+
 
 ### Tunnel, both directions
 
@@ -1037,8 +1040,8 @@ ping -c3 10.0.30.70                  # 38 ms, ttl=63
 The reverse direction matters. A tunnel that carries traffic one way is a
 tunnel with a routing or policy problem you have not found yet.
 
-> 📸 **Screenshot:** Azure workload VM pinging an on-prem container at 38 ms, `ttl=63`
-> `docs/screenshots/24-azure-to-onprem.png`
+<img width="946" height="344" alt="image" src="https://github.com/user-attachments/assets/1d1f40b5-0093-44e6-9b4b-1628e172700d" />
+
 
 
 ### Reboot survival
@@ -1055,8 +1058,8 @@ This test found a real fault — `wg-quick@wg0` failed at boot because its
 `PostUp` hook ran before the network was ready. Without the reboot test the
 tunnel would have been dead after the next power cut with no obvious reason.
 
-> 📸 **Screenshot:** Post-reboot verification — handshake, correct `src`, successful connect
-> `docs/screenshots/25-reboot-survival.png`
+<img width="563" height="395" alt="image" src="https://github.com/user-attachments/assets/9e97bf65-29ea-4109-a851-722c00cc39bf" />
+
 
 
 ### Useful one-liners
@@ -1077,8 +1080,8 @@ az network watcher test-ip-flow --vm lab-vm-workload -g lab-rg \
 that is not the NIC's own, so it cannot evaluate transit traffic through an
 NVA at all — which is exactly where NVA problems live.
 
-> 📸 **Screenshot:** `az network nic show-effective-route-table` with the UDR listed as Active
-> `docs/screenshots/26-effective-routes.png`
+<img width="903" height="880" alt="image" src="https://github.com/user-attachments/assets/92345c26-b7a3-4983-9d72-6e097c7eac09" />
+
 
 
 ---
@@ -1252,8 +1255,6 @@ The trunk hairpin is the constraint that justifies a layer 3 switch at larger
 scale: all inter-VLAN traffic contends for a single link's bandwidth. At four
 devices it is irrelevant; in a building it is not.
 
-> 📸 **Screenshot:** UniFi controller — port assignments and VLAN networks
-> `docs/screenshots/27-vlan-ports.png`
 
 ---
 
